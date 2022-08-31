@@ -16,21 +16,29 @@ const addMovie = (event) => {
     let ul = document.querySelector('ul')
     ul.appendChild(movie)
     deleteBtn.addEventListener('click', deleteMovie)
-   inputField = ''
+   inputField.value = ''
 }
 
 const deleteMovie = (event) => {
     event.target.parentNode.remove()
-    message.textContent = "Movie deleted!"
+    message.textContent = `${event.target.parentNode.firstChild.textContent} deleted`
+    revealMessage()
 }
 
 const crossOffMovie = (event) => {
     event.target.classList.toggle('checked')
-    if(event.target.classList.contains('checked')){
-        message.textContent = "Movie Watched!"
+    if(event.target.classList.contains('checked') === true){
+        message.textContent = `${event.target.textContent} Watched!`
     } else {
-        message.textContent = "Movie added back"
+        message.textContent = `${event.target.textContent} added back`
     }
+    revealMessage()
+}
+function revealMessage() {
+    message.classList.remove('hide')
+    setTimeout(() => {
+        message.classList.add('hide')
+    }, 750);
 }
 
 let form = document.querySelector('form')
